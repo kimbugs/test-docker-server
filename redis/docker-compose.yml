@@ -1,0 +1,11 @@
+version: '3'
+services:
+ test-redis:
+  image: redis:6.0
+  container_name: production_redis
+  network_mode: "host"
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - /data/redis:/data
+   - ./redis.conf:/usr/local/etc/redis/redis.conf
+  command: redis-server /usr/local/etc/redis/redis.conf

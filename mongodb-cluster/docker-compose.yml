@@ -1,0 +1,23 @@
+version: "3"
+services:
+ mongo_1:
+  image: mongo:4.4.0
+  ports:
+   - 30000:27017
+  volumes:
+   - ./data1:/data/db
+  command: mongod --replSet my-mongo
+ mongo_2:
+  image: mongo:4.4.0
+  ports:
+   - 30001:27017
+  volumes:
+   - ./data2:/data/db
+  command: mongod --replSet my-mongo
+ mongo_3:
+  image: mongo:4.4.0
+  ports:
+   - 30002:27017
+  volumes:
+   - ./data3:/data/db
+  command: mongod --replSet my-mongo

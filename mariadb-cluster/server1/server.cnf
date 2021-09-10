@@ -1,0 +1,23 @@
+[mysqld]
+server_id=3001
+max_connections=1000
+# bind-address=0.0.0.0
+port = 3306
+wait_timeout=600
+
+default-time-zone='+9:00'
+event_scheduler=ON
+
+# thread_concurrency = 8
+# slave_parallel_worker=8
+# slave_skip_errors=1062
+
+log-bin         = mariadb-bin
+max_binlog_size = 1G
+expire_logs_days = 3
+binlog_format   =  MIXED
+log_slave_updates=ON
+
+# innodb-log-file-size    = 2048M
+# innodb_buffer_pool_size = 16G
+# innodb_flush_log_at_trx_commit = 2

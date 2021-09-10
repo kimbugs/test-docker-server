@@ -1,0 +1,38 @@
+version: '3'
+services:
+ server1:
+  image: mariadb:10.1.38
+  container_name: test-server1
+  ports: 
+   - 3307:3306
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - /data/mariadb-cluster/server1:/var/lib/mysql
+   - ./server1/server.cnf:/etc/mysql/conf.d/server.cnf
+  environment: 
+   - MYSQL_ROOT_PASSWORD=root
+  restart: always
+ server2:
+  image: mariadb:10.1.38
+  container_name: test-server2
+  ports: 
+   - 3308:3306
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - /data/mariadb-cluster/server2:/var/lib/mysql
+   - ./server2/server.cnf:/etc/mysql/conf.d/server.cnf
+  environment: 
+   - MYSQL_ROOT_PASSWORD=root
+  restart: always
+ server3:
+  image: mariadb:10.1.38
+  container_name: test-server3
+  ports: 
+   - 3309:3306
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - /data/mariadb-cluster/server3:/var/lib/mysql
+   - ./server3/server.cnf:/etc/mysql/conf.d/server.cnf
+  environment: 
+   - MYSQL_ROOT_PASSWORD=root
+  restart: always

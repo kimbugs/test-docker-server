@@ -1,0 +1,9 @@
+STOP SLAVE;
+
+CHANGE MASTER TO 
+	MASTER_HOST='server1',
+	MASTER_USER='replication_user',
+	MASTER_PASSWORD='replication',
+	MASTER_PORT=3306;
+	
+START SLAVE;
