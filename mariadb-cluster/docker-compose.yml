@@ -7,7 +7,8 @@ services:
    - 3307:3306
   volumes:
    - /etc/localtime:/etc/localtime:ro
-   - /data/mariadb-cluster/server1:/var/lib/mysql
+   - ./test-data1:/var/lib/mysql
+   - ./server1/master.sql:/docker-entrypoint-initdb.d/master.sql
    - ./server1/server.cnf:/etc/mysql/conf.d/server.cnf
   environment: 
    - MYSQL_ROOT_PASSWORD=root
@@ -15,11 +16,14 @@ services:
  server2:
   image: mariadb:10.1.38
   container_name: test-server2
+  depends-on:
+   - test-server1
   ports: 
    - 3308:3306
   volumes:
    - /etc/localtime:/etc/localtime:ro
-   - /data/mariadb-cluster/server2:/var/lib/mysql
+   - ./test-data2:/var/lib/mysql
+   - ./server2/slave.sql:/docker-entrypoint-initdb.d/slave.sql
    - ./server2/server.cnf:/etc/mysql/conf.d/server.cnf
   environment: 
    - MYSQL_ROOT_PASSWORD=root
@@ -27,11 +31,14 @@ services:
  server3:
   image: mariadb:10.1.38
   container_name: test-server3
+  depends-on:
+   - test-server1
   ports: 
    - 3309:3306
   volumes:
    - /etc/localtime:/etc/localtime:ro
-   - /data/mariadb-cluster/server3:/var/lib/mysql
+   - ./test-data3:/var/lib/mysql
+   - ./server3/slave.sql:/docker-entrypoint-initdb.d/slave.sql
    - ./server3/server.cnf:/etc/mysql/conf.d/server.cnf
   environment: 
    - MYSQL_ROOT_PASSWORD=root

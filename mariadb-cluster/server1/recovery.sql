@@ -1,0 +1,1 @@
+SELECT @@GLOBAL.gtid_current_pos;

@@ -10,7 +10,7 @@ event_scheduler=ON
 
 # thread_concurrency = 8
 # slave_parallel_worker=8
-# slave_skip_errors=1062
+# slave_skip_errors=1062, 1032
 
 log-bin         = mariadb-bin
 max_binlog_size = 1G
