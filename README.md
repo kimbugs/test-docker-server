@@ -3,12 +3,12 @@ All test service run command
 ```sh
 docker-compose up
 ```
-- Influxdb 1.8.x
-- Influxdb 2.x
-- Mariadb-cluster 
-- Mongodb-cluster 4.4.0
-- Mqtt(mosquitto) 1.6.12
-- Redis 6.0
+- [Influxdb 1.8.x](#influxdb-1.8.x)
+- [Influxdb 2.x](#influxdb-2.x)
+- [Mariadb cluster](#mariadb-cluster)
+- [Mongodb cluster 4.4.0](#mongodb-cluster)
+- [Mqtt(mosquitto) 1.6.12](#mqtt-mosquitto)
+- [Redis 6.0](#redis)
 
 ## Influxdb 1.8.x
 
@@ -22,19 +22,19 @@ version = 2.0.4
 
 Web page is `localhost:8086`
 
-## Mariadb-cluster
+## Mariadb cluster
 
 version = 10.1.38
 
 [Percona Toolkit Install](https://www.percona.com/doc/percona-repo-config/installing.html)
 
-## Mongodb-cluster
+## Mongodb cluster
 
 version = 4.4.0
 
 replSet my-mongo
 
-## Mqtt-mosquitto
+## Mqtt mosquitto
 
 version = 1.6.12
 
