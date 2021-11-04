@@ -30,6 +30,8 @@ version = 10.1.38
 
 [Public Mariabackup](https://mariadb.com/kb/en/incremental-backup-and-restore-with-mariabackup)
 
+#### Backup
+
 Full backup
 ```sh
 mariabackup --backup --target-dir=/backup/full \
@@ -42,7 +44,7 @@ mariabackup --backup --target-dir=/backup/incremental1 \
 --incremental-basedir=/backup/full --user=root --password=root
 ```
 
-Restore
+#### Restore
 
 Prepare full backup restore
 ```sh
@@ -82,7 +84,9 @@ See file for useage [partition.sh](mariadb-cluster/pt-online-schema-change/parti
 
 #### Backup regularly 
 
-Fullbackup is 1st of every month, incremental backup is 8,15,22,26 of every month.
+풀 백업을 1일이면 실행한다. 8, 15, 22, 26일 경우에는 증분 백업을 실행한다.
+
+풀 백업을 하기전에 그전 풀백업과 증분 백업 데이터를 전부 삭제 한다.
 
 실행시 다음달 부터 정상동작한다. 이번달 부터 실행 하고 싶으면 풀 백업을 `full-2021-10-01` 형태로 만들어 주어야 증분 백업들이 정상 동작한다.
 
