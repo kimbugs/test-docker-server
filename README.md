@@ -9,7 +9,6 @@ docker-compose up
 - [Mongodb cluster 4.4.0](#mongodb-cluster)
 - [Mqtt(mosquitto) 1.6.12](#mqtt-mosquitto)
 - [Redis 6.0](#redis)
-- [Cron](#cron)
 
 ## Influxdb 1.8.x
 
