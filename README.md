@@ -61,9 +61,15 @@ Prepare incremental2 backup restore
 mariabackup --prepare --apply-log-only --target-dir=/backup/full --incremental-dir=/backup/increment2
 ```
 
-Restore backup
+Restore mariabackup tool
 ```sh
 mariabackup --copy-back --target-dir=/backup/full
+```
+Restore other tool
+```sh
+rsync -avrP /var/mariadb/backup /var/lib/mysql/
+chown -R mysql:mysql /var/lib/mysql/
+rm /var/lib/mysql/ib_logfile*
 ```
 
 Permisssion
