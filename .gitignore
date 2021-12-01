@@ -1,5 +1,11 @@
-# data volume
+# test
+test-*
+
+# test data volume
 test-data*/
+
+# test log
+test-log*/
 
 # mqtt password
 *.passwd

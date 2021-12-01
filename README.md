@@ -9,6 +9,7 @@ docker-compose up
 - [Mongodb cluster 4.4.0](#mongodb-cluster)
 - [Mqtt(mosquitto) 1.6.12](#mqtt-mosquitto)
 - [Redis 6.0](#redis)
+- [Cron](#cron)
 
 ## Influxdb 1.8.x
 
@@ -26,7 +27,103 @@ Web page is `localhost:8086`
 
 version = 10.1.38
 
+### Mariabackup
+
+[Public Mariabackup](https://mariadb.com/kb/en/incremental-backup-and-restore-with-mariabackup)
+
+Full backup
+```sh
+mariabackup --backup --target-dir=/backup/full \
+--user=root --password=root
+```
+
+Incremental backup
+```sh
+mariabackup --backup --target-dir=/backup/incremental1 \
+--incremental-basedir=/backup/full --user=root --password=root
+```
+
+Restore
+
+Prepare full backup restore
+```sh
+mariabackup --prepare --apply-log-only --target-dir=/backup/full
+```
+
+Prepare incremental1 backup restore
+```sh
+mariabackup --prepare --apply-log-only --target-dir=/backup/full --incremental-dir=/backup/increment1
+```
+
+Prepare incremental2 backup restore
+```sh
+mariabackup --prepare --apply-log-only --target-dir=/backup/full --incremental-dir=/backup/increment2
+```
+
+Restore backup
+```sh
+mariabackup --copy-back --target-dir=/backup/full
+```
+
+Permisssion
+```sh
+chown -R mysql:mysql /var/lib/mysql/
+```
+
+### Utility
+
+#### Online alter table
+
+If you want online alter table. Install percona toolkit and use `pt-online-shema-change`.
+
+See file for useage [partition.sh](mariadb-cluster/pt-online-schema-change/partition.sh)
+
+
 [Percona Toolkit Install](https://www.percona.com/doc/percona-repo-config/installing.html)
+
+#### Backup regularly 
+
+Fullbackup is 1st of every month, incremental backup is 8,15,22,26 of every month.
+
+실행시 다음달 부터 정상동작한다. 이번달 부터 실행 하고 싶으면 풀 백업을 `full-2021-10-01` 형태로 만들어 주어야 증분 백업들이 정상 동작한다.
+
+[backup.sh](mariadb-backup/backup.sh)
+
+Parameter
+```sh
+BASE_PATH=/var/lib/mysql/backup
+FULL_BACKUP_DAY=01 # ex) 01, 02, 03 ... 31
+INC_DAY1=08
+INC_DAY2=15
+INC_DAY3=22
+INC_DAY4=26
+DB_USER=root
+DB_PASSWORD=root
+```
+
+Test
+```sh
+# For test
+input=$1
+timestamp=$(date +"%F %T")
+datetime=$(date -d ${input} +"%F")
+past_datetime=$(date -d "${input} -1 month" +"%F")
+day=$(date -d ${input} +"%d")
+
+$ backup.sh 2021-10-01
+```
+
+production
+```sh
+# For Production
+timestamp=$(date +"%F %T")
+datetime=$(date +"%F")
+past_datetime=$(date +"%F" -d '1 month ago')
+day=$(date +"%d")
+
+$ backup.sh
+```
+
 
 ## Mongodb cluster
 
