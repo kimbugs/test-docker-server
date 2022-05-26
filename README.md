@@ -88,6 +88,11 @@ See file for useage [partition.sh](mariadb-cluster/pt-online-schema-change/parti
 
 [Percona Toolkit Install](https://www.percona.com/doc/percona-repo-config/installing.html)
 
+After install
+```sh
+apt install percona-toolkit
+```
+
 #### Backup regularly 
 
 풀 백업을 1일이면 실행한다. 8, 15, 22, 26일 경우에는 증분 백업을 실행한다.
