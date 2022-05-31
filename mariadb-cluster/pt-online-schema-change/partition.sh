@@ -41,5 +41,6 @@ pt-online-schema-change \
 --user=${id} \
 --password=${password} \
 --chunk-index=PRIMARY \
+--no-check-replication-filters
 --charset=UTF8 \
 --execute
